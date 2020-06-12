@@ -25,7 +25,7 @@ namespace AcessoDados
 				{
 					conexao.Open(); //Abre a conexao com o DB
 									//Código SQL para listar tudo da tabela personagens
-					sql.Append("USE bmh6qyguc3q2m5pj55e9; ");
+					
 					sql.Append("SELECT * FROM Personagens");
 					//Especifica quais serão os comandos e qual a conexao para o SQL
 					comandoSql.CommandText = sql.ToString();
@@ -51,7 +51,7 @@ namespace AcessoDados
 				{
 					conexao.Open();
 
-                    sql.Append("USE bmh6qyguc3q2m5pj55e9; ");
+                    
 					sql.Append("SELECT * FROM Personagens ");
 					sql.Append("WHERE Nome_Personagem LIKE @Nome"); //Condição
 

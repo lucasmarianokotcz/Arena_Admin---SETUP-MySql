@@ -25,7 +25,7 @@ namespace AcessoDados
                 {
                     conexao.Open(); //Abre a conexao com o DB
 					//Código SQL para listar tudo da tabela monstros
-                    sql.Append("USE bmh6qyguc3q2m5pj55e9; ");
+                    
                     sql.Append("SELECT * FROM Monstros");
 					//Especifica quais serão os comandos e qual a conexao para o SQL
                     comandoSql.CommandText = sql.ToString();
