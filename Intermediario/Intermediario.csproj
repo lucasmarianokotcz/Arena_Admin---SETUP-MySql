@@ -88,6 +88,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IRepositorySelectById.cs" />
     <Compile Include="MonstroBLL.cs" />
     <Compile Include="Monstros.cs" />
     <Compile Include="Personagens.cs" />
