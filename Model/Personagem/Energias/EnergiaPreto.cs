@@ -1,6 +1,6 @@
 ﻿namespace Model.Personagem.Energias
 {
-    public class Preto : Energia
+    public class EnergiaPreto : Energia
     {
     }
 }

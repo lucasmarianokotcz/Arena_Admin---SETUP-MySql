@@ -1,48 +1,49 @@
 ﻿using Intermediario;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model.Shared;
-using Model.Monstro;
-using Model.Monstro.Regras.Classes;
+using Model.Personagem;
+using Model.Personagem.Regras.Classes;
 using System;
 using System.Collections.Generic;
+using Model.Personagem.Energias;
 
 namespace Testes
 {
     [TestClass]
-    public class MonstroBLLTest
+    public class PersonagemBLLTest
     {
         [TestMethod]
-        public void ReturnListMonstros()
+        public void ReturnListPersonagems()
         {
-            List<Monstro> lstMonstros = new MonstroBLL().Select();
-            Assert.IsTrue(lstMonstros != null, "Deve acessar o banco e retornar uma lista de monstros (mesmo que vazia).");
+            List<Personagem> lstPersonagems = new PersonagemBLL().Select();
+            Assert.IsTrue(lstPersonagems != null, "Deve acessar o banco e retornar uma lista de personagens (mesmo que vazia).");
         }
 
         [TestMethod]
-        public void ReturnOneMonstro()
+        public void ReturnOnePersonagem()
         {
-            List<Monstro> lstMonstros = new MonstroBLL().Select();
-            Assert.IsTrue(lstMonstros.Count > 0, "Deve retornar ao menos 1 registro na tabela monstros.");
+            List<Personagem> lstPersonagems = new PersonagemBLL().Select();
+            Assert.IsTrue(lstPersonagems.Count > 0, "Deve retornar ao menos 1 registro na tabela personagens.");
         }
 
         [TestMethod]
-        public void InsereMonstro()
+        public void InserePersonagem()
         {
             var random = new Random();
 
-            // cria objeto monstro
-            Monstro obj = new Monstro()
+            // cria objeto personagem
+            Personagem obj = new Personagem()
             {
                 Nome = "Teste " + random.Next(1, 100),
                 Descricao = "Teste descrição " + random.Next(1, 100),
                 Foto = new byte[0],
             };
 
-            // cria habilidades do monstro
-            List<HabilidadeMonstro> lst = new List<HabilidadeMonstro>();
-            for (int i = 1; i <= MonstroRegras.NumeroHabilidades; i++)
+            // cria habilidades do personagem
+            List<HabilidadePersonagem> lst = new List<HabilidadePersonagem>();
+            for (int i = 1; i <= PersonagemRegras.NumeroHabilidades; i++)
             {
-                lst.Add(new HabilidadeMonstro()
+                lst.Add(new HabilidadePersonagem()
                 {
                     Nome = "Teste hab " + i,
                     Descricao = "Teste hab descrição " + i,
@@ -56,7 +57,10 @@ namespace Testes
                     DanoPorTurno = new DanoPorTurno() { DanoHabilidade = i, Turnos = i },
                     DanoVerdadeiro = new DanoVerdadeiro() { DanoHabilidade = i },
                     DanoVerdadeiroPorTurno = new DanoVerdadeiroPorTurno() { DanoHabilidade = i, Turnos = i },
-                    Disposicao = i,
+                    EnergiaVerde = new EnergiaVerde() { Quantidade = i, Ganho = i },
+                    EnergiaAzul = new EnergiaAzul() { Quantidade = i, Ganho = i },
+                    EnergiaVermelho = new EnergiaVermelho() { Quantidade = i, Ganho = i },
+                    EnergiaPreto = new EnergiaPreto() { Quantidade = i, Ganho = i },
                     Foto = new byte[0],
                     Invulnerabilidade = i,
                     Recarga = i,
@@ -65,32 +69,32 @@ namespace Testes
 
             obj.Habilidades = lst;
 
-            // tenta persistir monstro
-            bool aux = new MonstroBLL().Insert(obj);
-            Assert.IsTrue(aux, "Deve inserir um monstro no banco de dados em todas as tabelas.");
+            // tenta persistir personagem
+            bool aux = new PersonagemBLL().Insert(obj);
+            Assert.IsTrue(aux, "Deve inserir um personagem no banco de dados em todas as tabelas.");
         }
 
         [TestMethod]
-        public void AlteraMonstro()
+        public void AlteraPersonagem()
         {
             var random = new Random();
 
-            // cria objeto monstro
-            Monstro obj = new Monstro()
+            // cria objeto personagem
+            Personagem obj = new Personagem()
             {
-                Id = 3,
+                Id = 1,
                 Nome = "Teste " + random.Next(1, 100),
                 Descricao = "Teste descrição " + random.Next(1, 100),
                 Foto = new byte[0],
             };
 
-            // cria habilidades do monstro
-            List<HabilidadeMonstro> lst = new List<HabilidadeMonstro>();
-            for (int i = 1; i <= MonstroRegras.NumeroHabilidades; i++)
+            // cria habilidades do personagem
+            List<HabilidadePersonagem> lst = new List<HabilidadePersonagem>();
+            for (int i = 1; i <= PersonagemRegras.NumeroHabilidades; i++)
             {
-                lst.Add(new HabilidadeMonstro()
+                lst.Add(new HabilidadePersonagem()
                 {
-                    Id = 3,
+                    Id = 1,
                     Nome = "Teste hab " + 5,
                     Descricao = "Teste hab descrição " + 5,
                     Armadura = new Armadura() { ArmaduraHabilidade = i },
@@ -103,7 +107,10 @@ namespace Testes
                     DanoPorTurno = new DanoPorTurno() { DanoHabilidade = i, Turnos = i },
                     DanoVerdadeiro = new DanoVerdadeiro() { DanoHabilidade = i },
                     DanoVerdadeiroPorTurno = new DanoVerdadeiroPorTurno() { DanoHabilidade = i, Turnos = i },
-                    Disposicao = i,
+                    EnergiaVerde = new EnergiaVerde() { Quantidade = i, Ganho = i },
+                    EnergiaAzul = new EnergiaAzul() { Quantidade = i, Ganho = i },
+                    EnergiaVermelho = new EnergiaVermelho() { Quantidade = i, Ganho = i },
+                    EnergiaPreto = new EnergiaPreto() { Quantidade = i, Ganho = i },
                     Foto = new byte[0],
                     Invulnerabilidade = i,
                     Recarga = i,
@@ -112,19 +119,19 @@ namespace Testes
 
             obj.Habilidades = lst;
 
-            // tenta persistir monstro
-            bool aux = new MonstroBLL().Update(obj);
-            Assert.IsTrue(aux, "Deve alterar um monstro no banco de dados em todas as tabelas.");
+            // tenta persistir personagem
+            bool aux = new PersonagemBLL().Update(obj);
+            Assert.IsTrue(aux, "Deve alterar um personagem no banco de dados em todas as tabelas.");
         }
 
         [TestMethod]
-        public void ExcluiMonstro()
+        public void ExcluiPersonagem()
         {
-            int id = 3;
+            int id = 1;
 
-            // tenta excluir monstro e suas habilidades
-            bool aux = new MonstroBLL().Delete(id);
-            Assert.IsTrue(aux, "Deve excluir um monstro no banco de dados em todas as tabelas.");
+            // tenta excluir personagem e suas habilidades
+            bool aux = new PersonagemBLL().Delete(id);
+            Assert.IsTrue(aux, "Deve excluir um personagem no banco de dados em todas as tabelas.");
         }
     }
 }

@@ -41,11 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Personagem\Energias\Azul.cs" />
+    <Compile Include="Personagem\Energias\EnergiaAzul.cs" />
     <Compile Include="Personagem\Energias\Energia.cs" />
-    <Compile Include="Personagem\Energias\Preto.cs" />
-    <Compile Include="Personagem\Energias\Verde.cs" />
-    <Compile Include="Personagem\Energias\Vermelho.cs" />
+    <Compile Include="Personagem\Energias\EnergiaPreto.cs" />
+    <Compile Include="Personagem\Energias\EnergiaVerde.cs" />
+    <Compile Include="Personagem\Energias\EnergiaVermelho.cs" />
     <Compile Include="Shared\Armadura.cs" />
     <Compile Include="Shared\Cura.cs" />
     <Compile Include="Shared\Dano.cs" />

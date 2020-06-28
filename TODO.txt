@@ -1,0 +1,3 @@
+//TODO:
+
+1. (Análise) Validação da Model, à respeito do tamanho dos campos no BD.
