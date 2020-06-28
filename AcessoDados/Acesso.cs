@@ -57,6 +57,56 @@ namespace AcessoDados
             }
         }
 
+        public bool Update(string query, Dictionary<string, object> parameters = null)
+        {
+            try
+            {
+                MySqlCommand sql = new MySqlCommand();
+
+                using (MySqlConnection conn = new MySqlConnection(Conexao.StringConexaoMySql))
+                {
+                    conn.Open();
+                    sql.Connection = conn;
+                    sql.CommandText = query;
+
+                    if (parameters != null && parameters.Count > 0)
+                        foreach (var parameter in parameters)
+                            sql.Parameters.AddWithValue(parameter.Key, parameter.Value);
+
+                    return sql.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{ ex.Message } - Método: Update");
+            }
+        }
+
+        public bool Delete(string query, Dictionary<string, object> parameters = null)
+        {
+            try
+            {
+                MySqlCommand sql = new MySqlCommand();
+
+                using (MySqlConnection conn = new MySqlConnection(Conexao.StringConexaoMySql))
+                {
+                    conn.Open();
+                    sql.Connection = conn;
+                    sql.CommandText = query;
+
+                    if (parameters != null && parameters.Count > 0)
+                        foreach (var parameter in parameters)
+                            sql.Parameters.AddWithValue(parameter.Key, parameter.Value);
+
+                    return sql.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{ ex.Message } - Método: Delete");
+            }
+        }
+
         public DataTable Select(string query, Dictionary<string, object> parameters = null)
         {
             try
