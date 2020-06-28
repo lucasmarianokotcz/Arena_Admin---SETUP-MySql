@@ -23,8 +23,87 @@ namespace Intermediario
 
         public bool Insert(Monstro obj)
         {
-            bool aux = false;
+            bool aux;
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
 
+            #region Query
+            sql.Append($" INSERT INTO {MonstroRegras.NomeTabela} VALUES ");
+            sql.Append(" (NULL, ");
+            sql.Append($" @nome_{MonstroRegras.NomeTabela}, ");
+            sql.Append($" @descricao_{MonstroRegras.NomeTabela}, ");
+            sql.Append($" @foto_{MonstroRegras.NomeTabela}) ");
+            #endregion
+
+            #region Parameters            
+            parameters[$"@nome_{MonstroRegras.NomeTabela}"] = obj.Nome;
+            parameters[$"@descricao_{MonstroRegras.NomeTabela}"] = obj.Descricao;
+            parameters[$"@foto_{MonstroRegras.NomeTabela}"] = obj.Foto;
+            #endregion
+
+            obj.Id = acesso.Insert_(sql.ToString(), parameters);
+            aux = obj.Id > 0;
+
+            for (int i = 1; i <= MonstroRegras.NumeroHabilidades; i++)
+            {
+                if (!aux)
+                    return aux;
+
+                #region Query
+                sql.Clear();
+                sql.Append($" INSERT INTO {MonstroRegras.NomeTabela}_hab{i} VALUES ");
+                sql.Append(" (NULL, ");
+                sql.Append($" @hab{i}_nome, ");
+                sql.Append($" @hab{i}_foto, ");
+                sql.Append($" @hab{i}_dano, ");
+                sql.Append($" @hab{i}_dano_por_turno, ");
+                sql.Append($" @hab{i}_dano_por_turno_turnos, ");
+                sql.Append($" @hab{i}_dano_perfurante, ");
+                sql.Append($" @hab{i}_dano_perfurante_por_turno, ");
+                sql.Append($" @hab{i}_dano_perfurante_por_turno_turnos, ");
+                sql.Append($" @hab{i}_dano_verdadeiro, ");
+                sql.Append($" @hab{i}_dano_verdadeiro_por_turno, ");
+                sql.Append($" @hab{i}_dano_verdadeiro_por_turno_turnos, ");
+                sql.Append($" @hab{i}_cura, ");
+                sql.Append($" @hab{i}_cura_por_turno, ");
+                sql.Append($" @hab{i}_cura_por_turno_turnos, ");
+                sql.Append($" @hab{i}_armadura, ");
+                sql.Append($" @hab{i}_armadura_por_turno, ");
+                sql.Append($" @hab{i}_armadura_por_turno_turnos, ");
+                sql.Append($" @hab{i}_descricao, ");
+                sql.Append($" @hab{i}_recarga, ");
+                sql.Append($" @hab{i}_invulnerabilidade, ");
+                sql.Append($" @hab{i}_disposicao, ");
+                sql.Append($" @hab{i}_id_monstro) ");
+                #endregion
+
+                #region Parameters
+                parameters.Clear();
+                parameters[$"@hab{i}_nome"] = obj.Habilidades[i - 1].Nome;
+                parameters[$"@hab{i}_foto"] = obj.Habilidades[i - 1].Foto;
+                parameters[$"@hab{i}_dano"] = obj.Habilidades[i - 1].Dano.DanoHabilidade;
+                parameters[$"@hab{i}_dano_por_turno"] = obj.Habilidades[i - 1].DanoPorTurno.DanoHabilidade;
+                parameters[$"@hab{i}_dano_por_turno_turnos"] = obj.Habilidades[i - 1].DanoPorTurno.Turnos;
+                parameters[$"@hab{i}_dano_perfurante"] = obj.Habilidades[i - 1].DanoPerfurante.DanoHabilidade;
+                parameters[$"@hab{i}_dano_perfurante_por_turno"] = obj.Habilidades[i - 1].DanoPerfurantePorTurno.DanoHabilidade;
+                parameters[$"@hab{i}_dano_perfurante_por_turno_turnos"] = obj.Habilidades[i - 1].DanoPerfurantePorTurno.Turnos;
+                parameters[$"@hab{i}_dano_verdadeiro"] = obj.Habilidades[i - 1].DanoVerdadeiro.DanoHabilidade;
+                parameters[$"@hab{i}_dano_verdadeiro_por_turno"] = obj.Habilidades[i - 1].DanoVerdadeiroPorTurno.DanoHabilidade;
+                parameters[$"@hab{i}_dano_verdadeiro_por_turno_turnos"] = obj.Habilidades[i - 1].DanoVerdadeiroPorTurno.Turnos;
+                parameters[$"@hab{i}_cura"] = obj.Habilidades[i - 1].Cura.CuraHabilidade;
+                parameters[$"@hab{i}_cura_por_turno"] = obj.Habilidades[i - 1].CuraPorTurno.CuraHabilidade;
+                parameters[$"@hab{i}_cura_por_turno_turnos"] = obj.Habilidades[i - 1].CuraPorTurno.Turnos;
+                parameters[$"@hab{i}_armadura"] = obj.Habilidades[i - 1].Armadura.ArmaduraHabilidade;
+                parameters[$"@hab{i}_armadura_por_turno"] = obj.Habilidades[i - 1].ArmaduraPorTurno.ArmaduraHabilidade;
+                parameters[$"@hab{i}_armadura_por_turno_turnos"] = obj.Habilidades[i - 1].ArmaduraPorTurno.Turnos;
+                parameters[$"@hab{i}_descricao"] = obj.Habilidades[i - 1].Descricao;
+                parameters[$"@hab{i}_recarga"] = obj.Habilidades[i - 1].Recarga;
+                parameters[$"@hab{i}_invulnerabilidade"] = obj.Habilidades[i - 1].Invulnerabilidade;
+                parameters[$"@hab{i}_disposicao"] = obj.Habilidades[i - 1].Disposicao;
+                parameters[$"@hab{i}_id_monstro"] = obj.Id;
+                #endregion
+
+                aux = acesso.Insert(sql.ToString(), parameters);
+            }
 
             return aux;
         }

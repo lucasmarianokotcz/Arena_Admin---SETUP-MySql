@@ -4,9 +4,25 @@ namespace Model
 {
     public class Habilidade : BaseModel
     {
+        private string _descricao;
+
         public string Nome { get; set; }
         public byte[] Foto { get; set; }
-        public string Descricao { get; set; }
+        public string Descricao
+        {
+            get => _descricao;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    _descricao = null;
+                }
+                else
+                {
+                    _descricao = value;
+                }
+            }
+        }
         public Dano Dano { get; set; }
         public DanoPorTurno DanoPorTurno { get; set; }
         public DanoPerfurante DanoPerfurante { get; set; }
