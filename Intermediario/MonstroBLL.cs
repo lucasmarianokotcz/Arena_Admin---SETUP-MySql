@@ -199,8 +199,42 @@ namespace Intermediario
 
         public bool Delete(int id)
         {
-            // TODO: Delete Monstro
-            return false;
+            bool aux = true;
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+
+            for (int i = 1; i <= numeroHabilidades; i++)
+            {
+                if (!aux)
+                    return aux;
+
+                #region Query
+                sql.Clear();
+                sql.Append($" DELETE FROM {monstro}_hab{i} ");
+                sql.Append($" WHERE hab{i}_id_{monstro} = @hab{i}_id_{monstro} ");
+                #endregion
+
+                #region Parameters
+                parameters.Clear();
+                parameters[$"@hab{i}_id_{monstro}"] = id;
+                #endregion
+
+                aux = acesso.Delete(sql.ToString(), parameters);
+            };
+
+            #region Query
+            sql.Clear();
+            sql.Append($" DELETE FROM {monstro} ");
+            sql.Append($" WHERE id_{monstro} = @id_{monstro} ");
+            #endregion
+
+            #region Parameters       
+            parameters.Clear();
+            parameters[$"@id_{monstro}"] = id;
+            #endregion
+
+            aux = acesso.Delete(sql.ToString(), parameters);
+
+            return aux;
         }
 
         public List<Monstro> Select()

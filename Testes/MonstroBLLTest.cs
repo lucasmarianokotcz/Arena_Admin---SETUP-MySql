@@ -78,7 +78,7 @@ namespace Testes
             // cria objeto monstro
             Monstro obj = new Monstro()
             {
-                Id = 10,
+                Id = 1,
                 Nome = "Teste " + random.Next(1, 100),
                 Descricao = "Teste descrição " + random.Next(1, 100),
                 Foto = new byte[0],
@@ -90,7 +90,7 @@ namespace Testes
             {
                 lst.Add(new Habilidade()
                 {
-                    Id = 6,
+                    Id = 1,
                     Nome = "Teste hab " + 5,
                     Descricao = "Teste hab descrição " + 5,
                     Armadura = new Armadura() { ArmaduraHabilidade = i },
@@ -115,6 +115,16 @@ namespace Testes
             // tenta persistir monstro
             bool aux = new MonstroBLL().Update(obj);
             Assert.IsTrue(aux, "Deve alterar um monstro no banco de dados em todas as tabelas.");
+        }
+
+        [TestMethod]
+        public void ExcluiMonstro()
+        {
+            int id = 1;
+
+            // tenta excluir monstro e suas habilidades
+            bool aux = new MonstroBLL().Delete(id);
+            Assert.IsTrue(aux, "Deve excluir um monstro no banco de dados em todas as tabelas.");
         }
     }
 }
