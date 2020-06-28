@@ -1,8 +1,8 @@
 ﻿using AcessoDados;
 using Intermediario.Interfaces;
-using Model;
-using Model.Atributos;
-using Model.Regras.Classes;
+using Model.Shared;
+using Model.Monstro;
+using Model.Monstro.Regras.Classes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -262,7 +262,7 @@ namespace Intermediario
                     };
                     for (int i = 1; i <= numeroHabilidades; i++)
                     {
-                        obj.Habilidades.Add(new Habilidade()
+                        obj.Habilidades.Add(new HabilidadeMonstro()
                         {
                             Id = Convert.ToInt32(r[$"id_hab{i}"]),
                             Nome = Convert.ToString(r[$"hab{i}_nome"]),

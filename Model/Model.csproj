@@ -41,15 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Atributos\Armadura.cs" />
-    <Compile Include="Atributos\Cura.cs" />
-    <Compile Include="Atributos\Dano.cs" />
+    <Compile Include="Personagem\Energias\Azul.cs" />
+    <Compile Include="Personagem\Energias\Energia.cs" />
+    <Compile Include="Personagem\Energias\Preto.cs" />
+    <Compile Include="Personagem\Energias\Verde.cs" />
+    <Compile Include="Personagem\Energias\Vermelho.cs" />
+    <Compile Include="Shared\Armadura.cs" />
+    <Compile Include="Shared\Cura.cs" />
+    <Compile Include="Shared\Dano.cs" />
     <Compile Include="BaseModel.cs" />
     <Compile Include="Habilidade.cs" />
-    <Compile Include="Monstro.cs" />
-    <Compile Include="Personagem.cs" />
+    <Compile Include="Monstro\HabilidadeMonstro.cs" />
+    <Compile Include="Monstro\Monstro.cs" />
+    <Compile Include="Personagem\HabilidadePersonagem.cs" />
+    <Compile Include="Personagem\Personagem.cs" />
+    <Compile Include="Personagem\Regras\Classes\PersonagemRegras.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Regras\Classes\MonstroRegras.cs" />
+    <Compile Include="Monstro\Regras\Classes\MonstroRegras.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

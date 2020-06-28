@@ -1,4 +1,4 @@
-﻿namespace Model.Regras.Classes
+﻿namespace Model.Monstro.Regras.Classes
 {
     public static class MonstroRegras
     {

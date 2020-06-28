@@ -1,8 +1,8 @@
 ﻿using Intermediario;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Model;
-using Model.Atributos;
-using Model.Regras.Classes;
+using Model.Shared;
+using Model.Monstro;
+using Model.Monstro.Regras.Classes;
 using System;
 using System.Collections.Generic;
 
@@ -39,10 +39,10 @@ namespace Testes
             };
 
             // cria habilidades do monstro
-            List<Habilidade> lst = new List<Habilidade>();
+            List<HabilidadeMonstro> lst = new List<HabilidadeMonstro>();
             for (int i = 1; i <= MonstroRegras.NumeroHabilidades; i++)
             {
-                lst.Add(new Habilidade()
+                lst.Add(new HabilidadeMonstro()
                 {
                     Nome = "Teste hab " + i,
                     Descricao = "Teste hab descrição " + i,
@@ -78,19 +78,19 @@ namespace Testes
             // cria objeto monstro
             Monstro obj = new Monstro()
             {
-                Id = 1,
+                Id = 2,
                 Nome = "Teste " + random.Next(1, 100),
                 Descricao = "Teste descrição " + random.Next(1, 100),
                 Foto = new byte[0],
             };
 
             // cria habilidades do monstro
-            List<Habilidade> lst = new List<Habilidade>();
+            List<HabilidadeMonstro> lst = new List<HabilidadeMonstro>();
             for (int i = 1; i <= MonstroRegras.NumeroHabilidades; i++)
             {
-                lst.Add(new Habilidade()
+                lst.Add(new HabilidadeMonstro()
                 {
-                    Id = 1,
+                    Id = 2,
                     Nome = "Teste hab " + 5,
                     Descricao = "Teste hab descrição " + 5,
                     Armadura = new Armadura() { ArmaduraHabilidade = i },
@@ -120,7 +120,7 @@ namespace Testes
         [TestMethod]
         public void ExcluiMonstro()
         {
-            int id = 1;
+            int id = 2;
 
             // tenta excluir monstro e suas habilidades
             bool aux = new MonstroBLL().Delete(id);

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Model
+namespace Model.Monstro
 {
     public class Monstro : BaseModel
     {
@@ -23,11 +23,11 @@ namespace Model
             }
         }
         public byte[] Foto { get; set; }
-        public List<Habilidade> Habilidades { get; set; }
+        public List<HabilidadeMonstro> Habilidades { get; set; }
 
         public Monstro()
         {
-            Habilidades = new List<Habilidade>();
+            Habilidades = new List<HabilidadeMonstro>();
         }
     }
 }

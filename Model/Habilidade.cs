@@ -1,8 +1,8 @@
-﻿using Model.Atributos;
+﻿using Model.Shared;
 
 namespace Model
 {
-    public class Habilidade : BaseModel
+    public abstract class Habilidade : BaseModel
     {
         private string _descricao;
 
@@ -34,8 +34,7 @@ namespace Model
         public Armadura Armadura { get; set; }
         public ArmaduraPorTurno ArmaduraPorTurno { get; set; }
         public int Recarga { get; set; }
-        public int Invulnerabilidade { get; set; }
-        public int Disposicao { get; set; }
+        public int Invulnerabilidade { get; set; }        
 
         public Habilidade()
         {
