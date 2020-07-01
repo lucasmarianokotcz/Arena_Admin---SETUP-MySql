@@ -52,6 +52,8 @@
     <Compile Include="MonstroBLLTest.cs" />
     <Compile Include="PersonagemBLLTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MonstroErrosTest.cs" />
+    <Compile Include="PersonagemErrosTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

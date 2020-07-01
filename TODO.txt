@@ -1,3 +1,5 @@
 //TODO:
 
-1. (Análise) Validação da Model, à respeito do tamanho dos campos no BD.
+OK = 1. (Análise) Validação da Model, à respeito do tamanho dos campos no BD;
+2. Refatorar e reorganizar o projeto Windows Forms;
+3. Interligar Windows Forms com o novo Intermediário (BLL);
