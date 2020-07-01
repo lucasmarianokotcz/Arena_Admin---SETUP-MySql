@@ -145,6 +145,10 @@
       <Project>{e25b954d-34c3-4d5c-9d98-d410ca9b6409}</Project>
       <Name>Intermediario</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{1b4ccd88-30ec-4f71-a9b7-941c6e12437d}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

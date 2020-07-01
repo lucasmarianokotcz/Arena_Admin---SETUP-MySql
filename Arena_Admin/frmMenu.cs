@@ -1,79 +1,76 @@
-﻿using System;
+﻿using Intermediario;
+using Model.Monstro;
+using Model.Personagem;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
-using System.Threading;
 
 namespace Arena_Admin
 {
     public partial class frmMenu : Form
     {
-        Intermediario.Personagens Personagens;          //Instanciação da classe Personagens
-        Intermediario.Monstros Monstros;                //Instanciação da classe Monstros
+        private List<Personagem> lstPersonagens;
+        private List<Monstro> lstMonstros;
 
-        public frmMenu()                //Método Construtor 
+        public frmMenu()
         {
-            InitializeComponent();      //Função Padrão
+            InitializeComponent();
         }
 
-        private void frmMenu_Load(object sender, EventArgs e)       //Evento Load 
+        private void frmMenu_Load(object sender, EventArgs e)
         {
             try
             {
-                Personagens = new Intermediario.Personagens();      //Instanciação da classe Personagens
-                dtgPersonagens.DataSource = Personagens.Listar();       //Setando o DataSource do DataGridView dos Personagens
-                Monstros = new Intermediario.Monstros();        //Instanciação da classe Monstros
-                dtgMonstros.DataSource = Monstros.Listar();     //Setando o DataSource do DataGridView dos Monstros
+                dtgPersonagens.DataSource = lstPersonagens = new PersonagemBLL().Select();
+                dtgMonstros.DataSource = lstMonstros = new MonstroBLL().Select();
             }
-            catch (Exception ex)        //Tratamento de erros genérico
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);       //Avisa o usuario do erro
+                MessageBox.Show(ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        Random rnd = new Random();
-
-        private void btnPersonagem_Click(object sender, EventArgs e)        //Evento click do botão Personagem 
+        private void btnPersonagem_Click(object sender, EventArgs e)
         {
-            frmControlePersonagens FormPersonagens = new frmControlePersonagens();      //Instanciação do Form ControlePersonagens
-            FormPersonagens.Show();     //Mostra o Form ControlePersonagens
-            this.Hide();        //Esconde o Form Menu
-        }
-        private void btnMonstros_Click(object sender, EventArgs e)        //Evento click do botão Monstro 
-        {
-            frmControleMonstros FormMonstros = new frmControleMonstros();      //Instanciação do Form ControleMonstros
-            FormMonstros.Show();     //Mostra o Form ControleMonstros
-            this.Hide();        //Esconde o Form Menu
+            frmControlePersonagens FormPersonagens = new frmControlePersonagens();
+            FormPersonagens.Show();
+            this.Hide();
         }
 
-        private void frmMenu_FormClosed(object sender, FormClosedEventArgs e)       //Encerra o Aplicativo quando o FormMenu é fechado 
+        private void btnMonstros_Click(object sender, EventArgs e)
+        {
+            frmControleMonstros FormMonstros = new frmControleMonstros();
+            FormMonstros.Show();
+            this.Hide();
+        }
+
+        private void frmMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
 
-        private void txtPesquisarPersonagem_TextChanged(object sender, EventArgs e)     //Evento para pesquisa de Personagens 
+        private void txtPesquisarPersonagem_TextChanged(object sender, EventArgs e)
         {
-            Personagens = new Intermediario.Personagens();      //Instanciação classe Personagens
-
-            if (txtPesquisarPersonagem.Text.Trim() != "")       //Verifica se não está vazio
-            {                                                   //Se não está, realiza a pesquisa com o banco de Dados
-                dtgPersonagens.DataSource = Personagens.ListarSearch(txtPesquisarPersonagem.Text.Trim());
+            if (!string.IsNullOrWhiteSpace(txtPesquisarPersonagem.Text))
+            {
+                dtgPersonagens.DataSource = lstPersonagens.Where(x => x.Nome.ToLower().StartsWith(txtPesquisarPersonagem.Text.Trim().ToLower())).ToList();
             }
             else
-            {                                                   //Se está, mostra a lista original com o banco de Dados
-                dtgPersonagens.DataSource = Personagens.Listar();
+            {
+                dtgPersonagens.DataSource = lstPersonagens;
             }
         }
 
-        private void txtPesquisarMonstro_TextChanged(object sender, EventArgs e)     //Evento para pesquisa de Monstros 
+        private void txtPesquisarMonstro_TextChanged(object sender, EventArgs e)
         {
-            Monstros = new Intermediario.Monstros();      //Instanciação classe Personagens
-
-            if (txtPesquisarMonstro.Text.Trim() != "")      //Verifica se não está vazio
-            {                                               //Se não está, realiza a pesquisa com o banco de Dados
-                dtgMonstros.DataSource = Monstros.ListarSearch(txtPesquisarMonstro.Text.Trim());
+            if (!string.IsNullOrWhiteSpace(txtPesquisarMonstro.Text))
+            {
+                dtgMonstros.DataSource = lstMonstros.Where(x => x.Nome.ToLower().StartsWith(txtPesquisarMonstro.Text.Trim().ToLower())).ToList();
             }
             else
-            {                                               //Se está, mostra a lista original com o banco de Dados
-                dtgMonstros.DataSource = Monstros.Listar();
+            {
+                dtgMonstros.DataSource = lstMonstros;
             }
         }
     }
