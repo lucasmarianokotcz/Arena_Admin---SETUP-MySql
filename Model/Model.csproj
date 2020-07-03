@@ -60,6 +60,7 @@
     <Compile Include="Personagem\Regras\Classes\PersonagemRegras.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Monstro\Regras\Classes\MonstroRegras.cs" />
+    <Compile Include="Shared\Enums\EOperacoesCrud.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

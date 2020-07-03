@@ -28,7 +28,7 @@ namespace Model.Personagem.Regras.Classes
             {
                 e.Append("Nome não pode ser vazio.\n");
             }
-            else if (nome.Trim().Length > maximoCaracteres)
+            else if (nome.Length > maximoCaracteres)
             {
                 e.Append($"Nome não pode ter mais que {maximoCaracteres} caracteres.\n");
             }
