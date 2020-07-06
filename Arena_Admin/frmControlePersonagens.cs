@@ -465,7 +465,7 @@ namespace Arena_Admin
             try
             {
                 FillDataPersonagem();
-                btnEditarNomeMonstro.Visible = operacao == EOperacoesCrud.Editar;
+                btnEditarNomePersonagem.Visible = operacao == EOperacoesCrud.Editar;
                 nomePersonagemEditado = comboNome.Text;
             }
             catch (Exception ex)
@@ -474,20 +474,20 @@ namespace Arena_Admin
             }
         }
 
-        private void btnEditarNomeMonstro_Click(object sender, EventArgs e)
+        private void btnEditarNomePersonagem_Click(object sender, EventArgs e)
         {
             try
             {
                 if (comboNome.Visible)      //Se é pra editar o nome
                 {
                     txtNome.Text = comboNome.Text;
-                    btnEditarNomeMonstro.Text = "Escolher outro monstro";
+                    btnEditarNomePersonagem.Text = "Escolher outro personagem";
                     comboNome.Visible = false;
                     txtNome.Visible = true;
                 }
                 else                        //Se é pra escolher outro monstro
                 {
-                    btnEditarNomeMonstro.Text = "Editar nome";
+                    btnEditarNomePersonagem.Text = "Editar nome";
                     txtNome.Visible = false;
                     comboNome.Visible = true;
                     comboNome.DroppedDown = true;   //Abre o comboBox
@@ -498,6 +498,7 @@ namespace Arena_Admin
                 MessageBox.Show(ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         #endregion
 
         #region Private Methods

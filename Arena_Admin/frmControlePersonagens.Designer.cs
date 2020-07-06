@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmControlePersonagens));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabBasicos = new System.Windows.Forms.TabPage();
-            this.btnEditarNomeMonstro = new System.Windows.Forms.Button();
+            this.btnEditarNomePersonagem = new System.Windows.Forms.Button();
             this.btnInverterPicBasicos = new System.Windows.Forms.Button();
             this.txtID = new System.Windows.Forms.TextBox();
             this.comboNome = new System.Windows.Forms.ComboBox();
@@ -446,7 +446,7 @@
             // 
             this.tabBasicos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.tabBasicos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabBasicos.Controls.Add(this.btnEditarNomeMonstro);
+            this.tabBasicos.Controls.Add(this.btnEditarNomePersonagem);
             this.tabBasicos.Controls.Add(this.btnInverterPicBasicos);
             this.tabBasicos.Controls.Add(this.txtID);
             this.tabBasicos.Controls.Add(this.comboNome);
@@ -464,18 +464,18 @@
             this.tabBasicos.TabIndex = 0;
             this.tabBasicos.Text = "Básicos";
             // 
-            // btnEditarNomeMonstro
+            // btnEditarNomePersonagem
             // 
-            this.btnEditarNomeMonstro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnEditarNomeMonstro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditarNomeMonstro.Location = new System.Drawing.Point(748, 78);
-            this.btnEditarNomeMonstro.Name = "btnEditarNomeMonstro";
-            this.btnEditarNomeMonstro.Size = new System.Drawing.Size(222, 27);
-            this.btnEditarNomeMonstro.TabIndex = 2;
-            this.btnEditarNomeMonstro.Text = "Editar nome";
-            this.btnEditarNomeMonstro.UseVisualStyleBackColor = false;
-            this.btnEditarNomeMonstro.Visible = false;
-            this.btnEditarNomeMonstro.Click += new System.EventHandler(this.btnEditarNomeMonstro_Click);
+            this.btnEditarNomePersonagem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnEditarNomePersonagem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditarNomePersonagem.Location = new System.Drawing.Point(748, 78);
+            this.btnEditarNomePersonagem.Name = "btnEditarNomePersonagem";
+            this.btnEditarNomePersonagem.Size = new System.Drawing.Size(222, 27);
+            this.btnEditarNomePersonagem.TabIndex = 2;
+            this.btnEditarNomePersonagem.Text = "Editar nome";
+            this.btnEditarNomePersonagem.UseVisualStyleBackColor = false;
+            this.btnEditarNomePersonagem.Visible = false;
+            this.btnEditarNomePersonagem.Click += new System.EventHandler(this.btnEditarNomePersonagem_Click);
             // 
             // btnInverterPicBasicos
             // 
@@ -652,7 +652,7 @@
             this.tabHab1.Name = "tabHab1";
             this.tabHab1.Size = new System.Drawing.Size(1000, 703);
             this.tabHab1.TabIndex = 1;
-            this.tabHab1.Text = " Habilidade 1";
+            this.tabHab1.Text = "Habilidade 1";
             // 
             // numHab1ArmaduraPorTurno_Turnos
             // 
@@ -4589,7 +4589,7 @@
         private System.Windows.Forms.Button btnInverterPicHab2;
         private System.Windows.Forms.Button btnInverterPicHab3;
         private System.Windows.Forms.Button btnInverterPicHab4;
-		private System.Windows.Forms.Button btnEditarNomeMonstro;
+		private System.Windows.Forms.Button btnEditarNomePersonagem;
 		private System.Windows.Forms.Label lblHab1DanoVerdadeiro;
 		private System.Windows.Forms.NumericUpDown numHab1DanoVerdadeiro;
 		private System.Windows.Forms.Label lblHab2DanoVerdadeiro;
