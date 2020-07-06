@@ -91,7 +91,6 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IRepositorySelectById.cs" />
     <Compile Include="MonstroBLL.cs" />
-    <Compile Include="Monstros.cs" />
     <Compile Include="PersonagemBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
