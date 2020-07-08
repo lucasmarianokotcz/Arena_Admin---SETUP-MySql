@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,7 +61,9 @@
     <Compile Include="Personagem\Regras\Classes\PersonagemRegras.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Monstro\Regras\Classes\MonstroRegras.cs" />
+    <Compile Include="Shared\Enums\EAlvoHabilidade.cs" />
     <Compile Include="Shared\Enums\EOperacoesCrud.cs" />
+    <Compile Include="Shared\Utilidades\Utils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

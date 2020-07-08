@@ -4,6 +4,7 @@ using Model.Personagem;
 using Model.Personagem.Energias;
 using Model.Personagem.Regras.Classes;
 using Model.Shared;
+using Model.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -84,7 +85,9 @@ namespace Intermediario
                 sql.Append($" @hab{i}_ganho_azul, ");
                 sql.Append($" @hab{i}_ganho_vermelho, ");
                 sql.Append($" @hab{i}_ganho_preto, ");
-                sql.Append($" @hab{i}_id_personagem) ");
+                sql.Append($" @hab{i}_id_personagem, ");
+                sql.Append($" @hab{i}_alvo) ");
+
                 #endregion
 
                 #region Parameters
@@ -118,6 +121,7 @@ namespace Intermediario
                 parameters[$"@hab{i}_ganho_vermelho"] = obj.Habilidades[i - 1].EnergiaVermelho.Ganho;
                 parameters[$"@hab{i}_ganho_preto"] = obj.Habilidades[i - 1].EnergiaPreto.Ganho;
                 parameters[$"@hab{i}_id_{personagem}"] = obj.Id;
+                parameters[$"@hab{i}_alvo"] = (int)obj.Habilidades[i - 1].Alvo;
                 #endregion
 
                 aux = acesso.Insert(sql.ToString(), parameters);
@@ -183,7 +187,8 @@ namespace Intermediario
                 sql.Append($" hab{i}_ganho_verde = @hab{i}_ganho_verde, ");
                 sql.Append($" hab{i}_ganho_azul = @hab{i}_ganho_azul, ");
                 sql.Append($" hab{i}_ganho_vermelho = @hab{i}_ganho_vermelho, ");
-                sql.Append($" hab{i}_ganho_preto = @hab{i}_ganho_preto ");
+                sql.Append($" hab{i}_ganho_preto = @hab{i}_ganho_preto, ");
+                sql.Append($" hab{i}_alvo = @hab{i}_alvo ");
                 sql.Append($" WHERE id_hab{i} = @id_hab{i} ");
                 #endregion
 
@@ -217,6 +222,7 @@ namespace Intermediario
                 parameters[$"@hab{i}_ganho_azul"] = obj.Habilidades[i - 1].EnergiaAzul.Ganho;
                 parameters[$"@hab{i}_ganho_vermelho"] = obj.Habilidades[i - 1].EnergiaVermelho.Ganho;
                 parameters[$"@hab{i}_ganho_preto"] = obj.Habilidades[i - 1].EnergiaPreto.Ganho;
+                parameters[$"@hab{i}_alvo"] = (int)obj.Habilidades[i - 1].Alvo;
                 parameters[$"@id_hab{i}"] = obj.Habilidades[i - 1].Id;
                 #endregion
 
@@ -312,7 +318,8 @@ namespace Intermediario
                             EnergiaAzul = new EnergiaAzul() { Quantidade = Convert.ToInt32(r[$"hab{i}_azul"]), Ganho = Convert.ToInt32(r[$"hab{i}_ganho_azul"]) },
                             EnergiaVermelho = new EnergiaVermelho() { Quantidade = Convert.ToInt32(r[$"hab{i}_vermelho"]), Ganho = Convert.ToInt32(r[$"hab{i}_ganho_vermelho"]) },
                             EnergiaPreto = new EnergiaPreto() { Quantidade = Convert.ToInt32(r[$"hab{i}_preto"]), Ganho = Convert.ToInt32(r[$"hab{i}_ganho_preto"]) },
-                            Invulnerabilidade = Convert.ToInt32(r[$"hab{i}_invulnerabilidade"])
+                            Invulnerabilidade = Convert.ToInt32(r[$"hab{i}_invulnerabilidade"]),
+                            Alvo = (EAlvoHabilidade)Convert.ToInt32(r[$"hab{i}_alvo"])
                         });
                     }
                     lst.Add(obj);

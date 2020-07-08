@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Model.Shared.Enums;
 
 namespace Intermediario
 {
@@ -76,7 +77,8 @@ namespace Intermediario
                 sql.Append($" @hab{i}_recarga, ");
                 sql.Append($" @hab{i}_invulnerabilidade, ");
                 sql.Append($" @hab{i}_disposicao, ");
-                sql.Append($" @hab{i}_id_monstro) ");
+                sql.Append($" @hab{i}_id_monstro, ");
+                sql.Append($" @hab{i}_alvo) ");
                 #endregion
 
                 #region Parameters
@@ -103,6 +105,7 @@ namespace Intermediario
                 parameters[$"@hab{i}_invulnerabilidade"] = obj.Habilidades[i - 1].Invulnerabilidade;
                 parameters[$"@hab{i}_disposicao"] = obj.Habilidades[i - 1].Disposicao;
                 parameters[$"@hab{i}_id_{monstro}"] = obj.Id;
+                parameters[$"@hab{i}_alvo"] = (int)obj.Habilidades[i - 1].Alvo;
                 #endregion
 
                 aux = acesso.Insert(sql.ToString(), parameters);
@@ -161,7 +164,8 @@ namespace Intermediario
                 sql.Append($" hab{i}_descricao = @hab{i}_descricao, ");
                 sql.Append($" hab{i}_recarga = @hab{i}_recarga, ");
                 sql.Append($" hab{i}_invulnerabilidade = @hab{i}_invulnerabilidade, ");
-                sql.Append($" hab{i}_disposicao = @hab{i}_disposicao ");
+                sql.Append($" hab{i}_disposicao = @hab{i}_disposicao, ");
+                sql.Append($" hab{i}_alvo = @hab{i}_alvo ");
                 sql.Append($" WHERE id_hab{i} = @id_hab{i} ");
                 #endregion
 
@@ -188,6 +192,7 @@ namespace Intermediario
                 parameters[$"@hab{i}_recarga"] = obj.Habilidades[i - 1].Recarga;
                 parameters[$"@hab{i}_invulnerabilidade"] = obj.Habilidades[i - 1].Invulnerabilidade;
                 parameters[$"@hab{i}_disposicao"] = obj.Habilidades[i - 1].Disposicao;
+                parameters[$"@hab{i}_alvo"] = (int)obj.Habilidades[i - 1].Alvo;
                 parameters[$"@id_hab{i}"] = obj.Habilidades[i - 1].Id;
                 #endregion
 
@@ -280,7 +285,8 @@ namespace Intermediario
                             Descricao = r[$"hab{i}_descricao"] is DBNull ? string.Empty : Convert.ToString(r[$"hab{i}_descricao"]),
                             Recarga = Convert.ToInt32(r[$"hab{i}_recarga"]),
                             Invulnerabilidade = Convert.ToInt32(r[$"hab{i}_invulnerabilidade"]),
-                            Disposicao = Convert.ToInt32(r[$"hab{i}_disposicao"])
+                            Disposicao = Convert.ToInt32(r[$"hab{i}_disposicao"]),
+                            Alvo = (EAlvoHabilidade)Convert.ToInt32(r[$"hab{i}_alvo"])
                         });
                     }
                     lst.Add(obj);

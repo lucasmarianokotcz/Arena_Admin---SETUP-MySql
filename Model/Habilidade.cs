@@ -1,4 +1,5 @@
 ﻿using Model.Shared;
+using Model.Shared.Enums;
 
 namespace Model
 {
@@ -34,7 +35,8 @@ namespace Model
         public Armadura Armadura { get; set; }
         public ArmaduraPorTurno ArmaduraPorTurno { get; set; }
         public int Recarga { get; set; }
-        public int Invulnerabilidade { get; set; }        
+        public int Invulnerabilidade { get; set; }
+        public EAlvoHabilidade Alvo { get; set; }
 
         public Habilidade()
         {

@@ -3,6 +3,7 @@ using Model.Monstro;
 using Model.Monstro.Regras.Classes;
 using Model.Shared;
 using Model.Shared.Enums;
+using Model.Shared.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -29,6 +30,7 @@ namespace Arena_Admin
         public frmControleMonstros()
         {
             InitializeComponent();
+            LoadCombosAlvo();
             lstMonstros = new MonstroBLL().Select();
         }
 
@@ -304,7 +306,7 @@ namespace Arena_Admin
                     }
                     else
                     {
-                        MessageBox.Show("Você deve preencher o nome e a foto de todas as Habilidades e do Monstro!", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Você deve preencher o nome e a foto de todas as Habilidades e do Monstro!\nTambém defina o Alvo de cada habilidade.", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 catch (Exception ex)
@@ -349,7 +351,7 @@ namespace Arena_Admin
                     }
                     else
                     {
-                        MessageBox.Show("Você precisa preencher pelo menos o nome e foto de cada página!", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Você deve preencher o nome e a foto de todas as Habilidades e do Monstro!\nTambém defina o Alvo de cada habilidade.", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         tabControl1.SelectedTab = tabHab4;
                     }
                 }
@@ -466,6 +468,7 @@ namespace Arena_Admin
                 FillDataMonstro();
                 btnEditarNomeMonstro.Visible = operacao == EOperacoesCrud.Editar;
                 nomeMonstroEditado = comboNome.Text;
+                SetCombosAlvo();
             }
             catch (Exception ex)
             {
@@ -501,6 +504,25 @@ namespace Arena_Admin
         #endregion
 
         #region Private Methods
+
+        private void LoadCombosAlvo()
+        {
+            Utils.Test<EAlvoHabilidade>(cmbHab1Alvo);
+            Utils.Test<EAlvoHabilidade>(cmbHab2Alvo);
+            Utils.Test<EAlvoHabilidade>(cmbHab3Alvo);
+            Utils.Test<EAlvoHabilidade>(cmbHab4Alvo);
+        }
+
+        private void SetCombosAlvo()
+        {
+            Monstro monstro = lstMonstros.Where(x => x.Nome == comboNome.Text).First();
+
+            int i = 0;
+            cmbHab1Alvo.SelectedIndex = cmbHab1Alvo.FindStringExact(monstro.Habilidades[i++].Alvo.GetEnumDescription());
+            cmbHab2Alvo.SelectedIndex = cmbHab1Alvo.FindStringExact(monstro.Habilidades[i++].Alvo.GetEnumDescription());
+            cmbHab3Alvo.SelectedIndex = cmbHab1Alvo.FindStringExact(monstro.Habilidades[i++].Alvo.GetEnumDescription());
+            cmbHab4Alvo.SelectedIndex = cmbHab1Alvo.FindStringExact(monstro.Habilidades[i++].Alvo.GetEnumDescription());
+        }
 
         #region Cria o objeto monstro
         private Monstro CreateMonstro()
@@ -560,7 +582,8 @@ namespace Arena_Admin
                 Disposicao = (int)numHab1Disposicao.Value,
                 Foto = (byte[])new ImageConverter().ConvertTo(picHab1.Image, typeof(byte[])),
                 Invulnerabilidade = (int)numHab1Invulnerabilidade.Value,
-                Recarga = (int)numHab1Recarga.Value
+                Recarga = (int)numHab1Recarga.Value,
+                Alvo = (EAlvoHabilidade)cmbHab1Alvo.SelectedValue
             };
         }
         private HabilidadeMonstro CreateMonstroHab2(int idHab = 0)
@@ -583,7 +606,8 @@ namespace Arena_Admin
                 Disposicao = (int)numHab2Disposicao.Value,
                 Foto = (byte[])new ImageConverter().ConvertTo(picHab2.Image, typeof(byte[])),
                 Invulnerabilidade = (int)numHab2Invulnerabilidade.Value,
-                Recarga = (int)numHab2Recarga.Value
+                Recarga = (int)numHab2Recarga.Value,
+                Alvo = (EAlvoHabilidade)cmbHab2Alvo.SelectedValue
             };
         }
         private HabilidadeMonstro CreateMonstroHab3(int idHab = 0)
@@ -606,7 +630,8 @@ namespace Arena_Admin
                 Disposicao = (int)numHab3Disposicao.Value,
                 Foto = (byte[])new ImageConverter().ConvertTo(picHab3.Image, typeof(byte[])),
                 Invulnerabilidade = (int)numHab3Invulnerabilidade.Value,
-                Recarga = (int)numHab3Recarga.Value
+                Recarga = (int)numHab3Recarga.Value,
+                Alvo = (EAlvoHabilidade)cmbHab3Alvo.SelectedValue
             };
         }
         private HabilidadeMonstro CreateMonstroHab4(int idHab = 0)
@@ -629,7 +654,8 @@ namespace Arena_Admin
                 Disposicao = (int)numHab4Disposicao.Value,
                 Foto = (byte[])new ImageConverter().ConvertTo(picHab4.Image, typeof(byte[])),
                 Invulnerabilidade = (int)numHab4Invulnerabilidade.Value,
-                Recarga = (int)numHab4Recarga.Value
+                Recarga = (int)numHab4Recarga.Value,
+                Alvo = (EAlvoHabilidade)cmbHab4Alvo.SelectedValue
             };
         }
         #endregion
@@ -924,7 +950,8 @@ namespace Arena_Admin
             strHab1.Append("\n\nDescrição: " + txtHab1Descricao.Text.Trim());
             strHab1.Append("\n\nTempo de Recarga: " + numHab1Recarga.Value + " turno(s)");
             strHab1.Append("\nTempo de Invulnerabilidade: " + numHab1Invulnerabilidade.Value);
-            strHab1.Append("\nDisposição: " + numHab1Disposicao.Value);
+            strHab1.Append("\nDisposição: " + numHab1Disposicao.Value + "\n---------------");
+            strHab1.Append("\nAlvo(s): " + cmbHab1Alvo.Text);
             rtxtConfirmaHab1.Text = strHab1.ToString();
             #endregion
 
@@ -944,7 +971,8 @@ namespace Arena_Admin
             strHab2.Append("\n\nDescrição: " + txtHab2Descricao.Text.Trim());
             strHab2.Append("\n\nTempo de Recarga: " + numHab2Recarga.Value + " turno(s)");
             strHab2.Append("\nTempo de Invulnerabilidade: " + numHab2Invulnerabilidade.Value);
-            strHab2.Append("\nDisposição: " + numHab2Disposicao.Value);
+            strHab2.Append("\nDisposição: " + numHab2Disposicao.Value + "\n---------------");
+            strHab2.Append("\nAlvo(s): " + cmbHab2Alvo.Text);
             rtxtConfirmaHab2.Text = strHab2.ToString();
             #endregion
 
@@ -964,7 +992,8 @@ namespace Arena_Admin
             strHab3.Append("\n\nDescrição: " + txtHab3Descricao.Text.Trim());
             strHab3.Append("\n\nTempo de Recarga: " + numHab3Recarga.Value + " turno(s)");
             strHab3.Append("\nTempo de Invulnerabilidade: " + numHab3Invulnerabilidade.Value);
-            strHab3.Append("\nDisposição: " + numHab3Disposicao.Value);
+            strHab3.Append("\nDisposição: " + numHab3Disposicao.Value + "\n---------------");
+            strHab3.Append("\nAlvo(s): " + cmbHab3Alvo.Text);
             rtxtConfirmaHab3.Text = strHab3.ToString();
             #endregion
 
@@ -984,7 +1013,8 @@ namespace Arena_Admin
             strHab4.Append("\n\nDescrição: " + txtHab4Descricao.Text.Trim());
             strHab4.Append("\n\nTempo de Recarga: " + numHab4Recarga.Value + " turno(s)");
             strHab4.Append("\nTempo de Invulnerabilidade: " + numHab4Invulnerabilidade.Value);
-            strHab4.Append("\nDisposição: " + numHab4Disposicao.Value);
+            strHab4.Append("\nDisposição: " + numHab4Disposicao.Value + "\n---------------");
+            strHab4.Append("\nAlvo(s): " + cmbHab4Alvo.Text);
             rtxtConfirmaHab4.Text = strHab4.ToString();
             #endregion
         }
@@ -1000,7 +1030,11 @@ namespace Arena_Admin
                     picHab1.Image != null &&
                     picHab2.Image != null &&
                     picHab3.Image != null &&
-                    picHab4.Image != null;
+                    picHab4.Image != null &&
+                    cmbHab1Alvo.SelectedIndex > -1 &&
+                    cmbHab2Alvo.SelectedIndex > -1 &&
+                    cmbHab3Alvo.SelectedIndex > -1 &&
+                    cmbHab4Alvo.SelectedIndex > -1;
         }
 
         #endregion

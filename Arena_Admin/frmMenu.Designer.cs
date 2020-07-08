@@ -156,9 +156,11 @@
             // Foto_Personagem
             // 
             this.Foto_Personagem.DataPropertyName = "Foto";
+            this.Foto_Personagem.Frozen = true;
             this.Foto_Personagem.HeaderText = "Foto";
             this.Foto_Personagem.Name = "Foto_Personagem";
             this.Foto_Personagem.ReadOnly = true;
+            this.Foto_Personagem.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Foto_Personagem.Width = 75;
             // 
             // Nome_Personagem
@@ -188,9 +190,11 @@
             // Foto_Monstro
             // 
             this.Foto_Monstro.DataPropertyName = "Foto";
+            this.Foto_Monstro.Frozen = true;
             this.Foto_Monstro.HeaderText = "Foto";
             this.Foto_Monstro.Name = "Foto_Monstro";
             this.Foto_Monstro.ReadOnly = true;
+            this.Foto_Monstro.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Foto_Monstro.Width = 75;
             // 
             // Nome_Monstro

@@ -306,6 +306,14 @@
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnCriar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
+            this.lblHab1Alvo = new System.Windows.Forms.Label();
+            this.cmbHab1Alvo = new System.Windows.Forms.ComboBox();
+            this.cmbHab2Alvo = new System.Windows.Forms.ComboBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.cmbHab3Alvo = new System.Windows.Forms.ComboBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.cmbHab4Alvo = new System.Windows.Forms.ComboBox();
+            this.label43 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabBasicos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPersonagem)).BeginInit();
@@ -587,6 +595,8 @@
             // 
             this.tabHab1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.tabHab1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabHab1.Controls.Add(this.cmbHab1Alvo);
+            this.tabHab1.Controls.Add(this.lblHab1Alvo);
             this.tabHab1.Controls.Add(this.numHab1ArmaduraPorTurno_Turnos);
             this.tabHab1.Controls.Add(this.label10);
             this.tabHab1.Controls.Add(this.numHab1CuraPorTurno_Turnos);
@@ -1444,6 +1454,8 @@
             // 
             this.tabHab2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.tabHab2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabHab2.Controls.Add(this.cmbHab2Alvo);
+            this.tabHab2.Controls.Add(this.label41);
             this.tabHab2.Controls.Add(this.numHab2ArmaduraPorTurno_Turnos);
             this.tabHab2.Controls.Add(this.label11);
             this.tabHab2.Controls.Add(this.numHab2CuraPorTurno_Turnos);
@@ -2301,6 +2313,8 @@
             // 
             this.tabHab3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.tabHab3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabHab3.Controls.Add(this.cmbHab3Alvo);
+            this.tabHab3.Controls.Add(this.label42);
             this.tabHab3.Controls.Add(this.numHab3ArmaduraPorTurno_Turnos);
             this.tabHab3.Controls.Add(this.label21);
             this.tabHab3.Controls.Add(this.numHab3CuraPorTurno_Turnos);
@@ -3158,6 +3172,8 @@
             // 
             this.tabHab4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.tabHab4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabHab4.Controls.Add(this.cmbHab4Alvo);
+            this.tabHab4.Controls.Add(this.label43);
             this.tabHab4.Controls.Add(this.numHab4ArmaduraPorTurno_Turnos);
             this.tabHab4.Controls.Add(this.label31);
             this.tabHab4.Controls.Add(this.numHab4CuraPorTurno_Turnos);
@@ -4264,6 +4280,90 @@
             this.btnExcluir.UseVisualStyleBackColor = false;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
+            // lblHab1Alvo
+            // 
+            this.lblHab1Alvo.AutoSize = true;
+            this.lblHab1Alvo.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHab1Alvo.Location = new System.Drawing.Point(525, 348);
+            this.lblHab1Alvo.Name = "lblHab1Alvo";
+            this.lblHab1Alvo.Size = new System.Drawing.Size(48, 19);
+            this.lblHab1Alvo.TabIndex = 73;
+            this.lblHab1Alvo.Text = "Alvo:";
+            this.lblHab1Alvo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbHab1Alvo
+            // 
+            this.cmbHab1Alvo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHab1Alvo.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.cmbHab1Alvo.FormattingEnabled = true;
+            this.cmbHab1Alvo.Location = new System.Drawing.Point(579, 345);
+            this.cmbHab1Alvo.Name = "cmbHab1Alvo";
+            this.cmbHab1Alvo.Size = new System.Drawing.Size(193, 27);
+            this.cmbHab1Alvo.TabIndex = 74;
+            // 
+            // cmbHab2Alvo
+            // 
+            this.cmbHab2Alvo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHab2Alvo.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.cmbHab2Alvo.FormattingEnabled = true;
+            this.cmbHab2Alvo.Location = new System.Drawing.Point(579, 345);
+            this.cmbHab2Alvo.Name = "cmbHab2Alvo";
+            this.cmbHab2Alvo.Size = new System.Drawing.Size(193, 27);
+            this.cmbHab2Alvo.TabIndex = 108;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(525, 348);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(48, 19);
+            this.label41.TabIndex = 107;
+            this.label41.Text = "Alvo:";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbHab3Alvo
+            // 
+            this.cmbHab3Alvo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHab3Alvo.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.cmbHab3Alvo.FormattingEnabled = true;
+            this.cmbHab3Alvo.Location = new System.Drawing.Point(579, 345);
+            this.cmbHab3Alvo.Name = "cmbHab3Alvo";
+            this.cmbHab3Alvo.Size = new System.Drawing.Size(193, 27);
+            this.cmbHab3Alvo.TabIndex = 141;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(525, 348);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(48, 19);
+            this.label42.TabIndex = 140;
+            this.label42.Text = "Alvo:";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbHab4Alvo
+            // 
+            this.cmbHab4Alvo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHab4Alvo.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F);
+            this.cmbHab4Alvo.FormattingEnabled = true;
+            this.cmbHab4Alvo.Location = new System.Drawing.Point(579, 345);
+            this.cmbHab4Alvo.Name = "cmbHab4Alvo";
+            this.cmbHab4Alvo.Size = new System.Drawing.Size(193, 27);
+            this.cmbHab4Alvo.TabIndex = 161;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(525, 348);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(48, 19);
+            this.label43.TabIndex = 160;
+            this.label43.Text = "Alvo:";
+            this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmControlePersonagens
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4686,5 +4786,13 @@
 		private System.Windows.Forms.NumericUpDown numHab4CuraPorTurno;
 		private System.Windows.Forms.Label label40;
 		private System.Windows.Forms.NumericUpDown numHab4DanoPorTurno;
-	}
+        private System.Windows.Forms.ComboBox cmbHab1Alvo;
+        private System.Windows.Forms.Label lblHab1Alvo;
+        private System.Windows.Forms.ComboBox cmbHab2Alvo;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.ComboBox cmbHab3Alvo;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.ComboBox cmbHab4Alvo;
+        private System.Windows.Forms.Label label43;
+    }
 }

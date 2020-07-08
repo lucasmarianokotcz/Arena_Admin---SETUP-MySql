@@ -4,8 +4,10 @@ using Model.Personagem.Energias;
 using Model.Personagem.Regras.Classes;
 using Model.Shared;
 using Model.Shared.Enums;
+using Model.Shared.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -30,6 +32,7 @@ namespace Arena_Admin
         public frmControlePersonagens()
         {
             InitializeComponent();
+            LoadCombosAlvo();
             lstPersonagens = new PersonagemBLL().Select();
         }
 
@@ -305,7 +308,7 @@ namespace Arena_Admin
                     }
                     else
                     {
-                        MessageBox.Show("Você deve preencher o nome e a foto de todas as Habilidades e do Personagem!", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Você deve preencher o nome e a foto de todas as Habilidades e do Personagem!\nTambém defina o Alvo de cada habilidade.", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 catch (Exception ex)
@@ -467,6 +470,7 @@ namespace Arena_Admin
                 FillDataPersonagem();
                 btnEditarNomePersonagem.Visible = operacao == EOperacoesCrud.Editar;
                 nomePersonagemEditado = comboNome.Text;
+                SetCombosAlvo();
             }
             catch (Exception ex)
             {
@@ -502,6 +506,25 @@ namespace Arena_Admin
         #endregion
 
         #region Private Methods
+
+        private void LoadCombosAlvo()
+        {
+            Utils.Test<EAlvoHabilidade>(cmbHab1Alvo);
+            Utils.Test<EAlvoHabilidade>(cmbHab2Alvo);
+            Utils.Test<EAlvoHabilidade>(cmbHab3Alvo);
+            Utils.Test<EAlvoHabilidade>(cmbHab4Alvo);
+        }
+
+        private void SetCombosAlvo()
+        {
+            Personagem personagem = lstPersonagens.Where(x => x.Nome == comboNome.Text).First();
+
+            int i = 0;
+            cmbHab1Alvo.SelectedIndex = cmbHab1Alvo.FindStringExact(personagem.Habilidades[i++].Alvo.GetEnumDescription());
+            cmbHab2Alvo.SelectedIndex = cmbHab1Alvo.FindStringExact(personagem.Habilidades[i++].Alvo.GetEnumDescription());
+            cmbHab3Alvo.SelectedIndex = cmbHab1Alvo.FindStringExact(personagem.Habilidades[i++].Alvo.GetEnumDescription());
+            cmbHab4Alvo.SelectedIndex = cmbHab1Alvo.FindStringExact(personagem.Habilidades[i++].Alvo.GetEnumDescription());
+        }
 
         #region Cria o objeto personagem
         private Personagem CreatePersonagem()
@@ -564,7 +587,8 @@ namespace Arena_Admin
                 EnergiaPreto = new EnergiaPreto() { Quantidade = (int)numHab1Pretos.Value, Ganho = (int)numHab1PretosGanhos.Value },
                 Foto = (byte[])new ImageConverter().ConvertTo(picHab1.Image, typeof(byte[])),
                 Invulnerabilidade = (int)numHab1Invulnerabilidade.Value,
-                Recarga = (int)numHab1Recarga.Value
+                Recarga = (int)numHab1Recarga.Value,
+                Alvo = (EAlvoHabilidade)cmbHab1Alvo.SelectedValue
             };
         }
         private HabilidadePersonagem CreatePersonagemHab2(int idHab = 0)
@@ -590,7 +614,8 @@ namespace Arena_Admin
                 EnergiaPreto = new EnergiaPreto() { Quantidade = (int)numHab2Pretos.Value, Ganho = (int)numHab2PretosGanhos.Value },
                 Foto = (byte[])new ImageConverter().ConvertTo(picHab2.Image, typeof(byte[])),
                 Invulnerabilidade = (int)numHab2Invulnerabilidade.Value,
-                Recarga = (int)numHab2Recarga.Value
+                Recarga = (int)numHab2Recarga.Value,
+                Alvo = (EAlvoHabilidade)cmbHab2Alvo.SelectedValue
             };
         }
         private HabilidadePersonagem CreatePersonagemHab3(int idHab = 0)
@@ -616,7 +641,8 @@ namespace Arena_Admin
                 EnergiaPreto = new EnergiaPreto() { Quantidade = (int)numHab3Pretos.Value, Ganho = (int)numHab3PretosGanhos.Value },
                 Foto = (byte[])new ImageConverter().ConvertTo(picHab3.Image, typeof(byte[])),
                 Invulnerabilidade = (int)numHab3Invulnerabilidade.Value,
-                Recarga = (int)numHab3Recarga.Value
+                Recarga = (int)numHab3Recarga.Value,
+                Alvo = (EAlvoHabilidade)cmbHab3Alvo.SelectedValue
             };
         }
         private HabilidadePersonagem CreatePersonagemHab4(int idHab = 0)
@@ -642,7 +668,8 @@ namespace Arena_Admin
                 EnergiaPreto = new EnergiaPreto() { Quantidade = (int)numHab4Pretos.Value, Ganho = (int)numHab4PretosGanhos.Value },
                 Foto = (byte[])new ImageConverter().ConvertTo(picHab4.Image, typeof(byte[])),
                 Invulnerabilidade = (int)numHab4Invulnerabilidade.Value,
-                Recarga = (int)numHab4Recarga.Value
+                Recarga = (int)numHab4Recarga.Value,
+                Alvo = (EAlvoHabilidade)cmbHab4Alvo.SelectedValue
             };
         }
         #endregion
@@ -704,6 +731,8 @@ namespace Arena_Admin
             numHab1AzulsGanhos.Value = personagem.Habilidades[i].EnergiaAzul.Ganho;
             numHab1VermelhosGanhos.Value = personagem.Habilidades[i].EnergiaVermelho.Ganho;
             numHab1PretosGanhos.Value = personagem.Habilidades[i].EnergiaPreto.Ganho;
+
+            cmbHab1Alvo.SelectedValue = personagem.Habilidades[i].Alvo;
         }
         private void FillDataHab2(Personagem personagem, int i)
         {
@@ -744,6 +773,8 @@ namespace Arena_Admin
             numHab2AzulsGanhos.Value = personagem.Habilidades[i].EnergiaAzul.Ganho;
             numHab2VermelhosGanhos.Value = personagem.Habilidades[i].EnergiaVermelho.Ganho;
             numHab2PretosGanhos.Value = personagem.Habilidades[i].EnergiaPreto.Ganho;
+
+            cmbHab2Alvo.SelectedValue = personagem.Habilidades[i].Alvo;
         }
         private void FillDataHab3(Personagem personagem, int i)
         {
@@ -784,6 +815,8 @@ namespace Arena_Admin
             numHab3AzulsGanhos.Value = personagem.Habilidades[i].EnergiaAzul.Ganho;
             numHab3VermelhosGanhos.Value = personagem.Habilidades[i].EnergiaVermelho.Ganho;
             numHab3PretosGanhos.Value = personagem.Habilidades[i].EnergiaPreto.Ganho;
+
+            cmbHab3Alvo.SelectedValue = personagem.Habilidades[i].Alvo;
         }
         private void FillDataHab4(Personagem personagem, int i)
         {
@@ -824,6 +857,8 @@ namespace Arena_Admin
             numHab4AzulsGanhos.Value = personagem.Habilidades[i].EnergiaAzul.Ganho;
             numHab4VermelhosGanhos.Value = personagem.Habilidades[i].EnergiaVermelho.Ganho;
             numHab4PretosGanhos.Value = personagem.Habilidades[i].EnergiaPreto.Ganho;
+
+            cmbHab4Alvo.SelectedValue = personagem.Habilidades[i].Alvo;
         }
         #endregion
 
@@ -984,7 +1019,8 @@ namespace Arena_Admin
             strHab1.Append("\nVerde(s) Ganhos: " + numHab1VerdesGanhos.Value);
             strHab1.Append("\nAzul(s) Ganhos: " + numHab1AzulsGanhos.Value);
             strHab1.Append("\nVermelho(s) Ganhos: " + numHab1VermelhosGanhos.Value);
-            strHab1.Append("\nPreto(s) Ganhos: " + numHab1PretosGanhos.Value);
+            strHab1.Append("\nPreto(s) Ganhos: " + numHab1PretosGanhos.Value + "\n---------------");
+            strHab1.Append("\nAlvo(s): " + cmbHab1Alvo.Text);
             rtfConfirmaHab1.Text = strHab1.ToString();
             #endregion
             #region Habilidade2
@@ -1012,7 +1048,8 @@ namespace Arena_Admin
             strHab2.Append("\nVerde(s) Ganhos: " + numHab2VerdesGanhos.Value);
             strHab2.Append("\nAzul(s) Ganhos: " + numHab2AzulsGanhos.Value);
             strHab2.Append("\nVermelho(s) Ganhos: " + numHab2VermelhosGanhos.Value);
-            strHab2.Append("\nPreto(s) Ganhos: " + numHab2PretosGanhos.Value);
+            strHab2.Append("\nPreto(s) Ganhos: " + numHab2PretosGanhos.Value + "\n---------------");
+            strHab2.Append("\nAlvo(s): " + cmbHab2Alvo.Text);
             rtfConfirmaHab2.Text = strHab2.ToString();
             #endregion
             #region Habilidade3
@@ -1039,8 +1076,8 @@ namespace Arena_Admin
             strHab3.Append("\n\nEnergias ganhas:");
             strHab3.Append("\nVerde(s) Ganhos: " + numHab3VerdesGanhos.Value);
             strHab3.Append("\nAzul(s) Ganhos: " + numHab3AzulsGanhos.Value);
-            strHab3.Append("\nVermelho(s) Ganhos: " + numHab3VermelhosGanhos.Value);
-            strHab3.Append("\nPreto(s) Ganhos: " + numHab3PretosGanhos.Value);
+            strHab3.Append("\nPreto(s) Ganhos: " + numHab3PretosGanhos.Value + "\n---------------");
+            strHab3.Append("\nAlvo(s): " + cmbHab3Alvo.Text);
             rtfConfirmaHab3.Text = strHab3.ToString();
             #endregion
             #region Habilidade4
@@ -1068,7 +1105,8 @@ namespace Arena_Admin
             strHab4.Append("\nVerde(s) Ganhos: " + numHab4VerdesGanhos.Value);
             strHab4.Append("\nAzul(s) Ganhos: " + numHab4AzulsGanhos.Value);
             strHab4.Append("\nVermelho(s) Ganhos: " + numHab4VermelhosGanhos.Value);
-            strHab4.Append("\nPreto(s) Ganhos: " + numHab4PretosGanhos.Value);
+            strHab4.Append("\nPreto(s) Ganhos: " + numHab4PretosGanhos.Value + "\n---------------");
+            strHab4.Append("\nAlvo(s): " + cmbHab4Alvo.Text);
             rtfConfirmaHab4.Text = strHab4.ToString();
             #endregion
         }
@@ -1084,7 +1122,11 @@ namespace Arena_Admin
                     picHab1.Image != null &&
                     picHab2.Image != null &&
                     picHab3.Image != null &&
-                    picHab4.Image != null;
+                    picHab4.Image != null &&
+                    cmbHab1Alvo.SelectedIndex > -1 &&
+                    cmbHab2Alvo.SelectedIndex > -1 &&
+                    cmbHab3Alvo.SelectedIndex > -1 &&
+                    cmbHab4Alvo.SelectedIndex > -1;
         }
 
         #endregion
